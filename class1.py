@@ -58,11 +58,33 @@
 # print(max(di.values())) max value
 # print(max(di,key=di.get)) max value에 대한 key
 
-num = 1
-li = [0 for i in range(10)]
-for i in range(3):
-    num = num * int(input())
-for j in [int(x) for x in str(num)]:
-    li[j] = li[j]+1
-for k in li:
-    print(k)
+# num = 1
+# li = [0 for i in range(10)]
+# for i in range(3):
+#     num = num * int(input())
+# for j in [int(x) for x in str(num)]:
+#     li[j] = li[j]+1
+# for k in li:
+#     print(k)
+
+# len = int(input())
+# c = []
+# w = []
+# for i in range(len):
+#     li = input().split()
+#     c.append(int(li[0]))
+#     w.append(list(li[1]))
+# for k, i in enumerate(w):
+#     for j in i:
+#         for z in range(c[k]):
+#             print(j, end='')
+        
+#     print()
+
+# num = int(input())
+# for i in range(1,10):
+#     print("{} * {} = {}".format(num, i, num*i))
+
+# num = int(input())
+# for i in range(1, num+1):
+#     print(i)
