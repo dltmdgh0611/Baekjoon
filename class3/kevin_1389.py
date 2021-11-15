@@ -1,23 +1,33 @@
 from collections import deque
 N,M = map(int, input().split())
 graph = {}
-result = [0 for i in range(M)]
+result = [0 for i in range(N)]
+s = [0 for i in range(N)]
 
-def BFS(graph, root, goal):
+def BFS(graph, root):
     visited = []
-    depthlist = [0] * M
+    predecessor = [0] * N
     queue = deque([root])
+
+    visited.append(root)
+
     while queue:
-        n = queue.popleft()
-        if n not in visited:
-            visited.append(n)
-            depthlist[n-1] = depthlist[root] + 1
-            if goal == n: return depthlist[n]
-            if n in graph:
-                temp = list(set(graph[n]) - set(visited))
-                temp.sort()
-                queue += temp
-    return -1
+        cur = queue.popleft()
+        for neighbor in graph[cur]:
+            if neighbor not in visited:
+                visited.append(neighbor)
+                predecessor[neighbor - 1] = cur
+                queue.append(neighbor)
+    return predecessor
+
+def back(pre, end):
+    r = 0
+    pointer = pre[end-1]
+    while True:
+        if pointer == 0 : return r
+        r += 1
+        pointer = pre[pointer-1]
+
 
 for _ in range(M):
     a, b = map(int, input().split())
@@ -32,11 +42,17 @@ for _ in range(M):
         graph[b].append(a)
     
 
-for i in range(1,M+1):
-    for j in range(1,M+1):
-        if i != j:
-            result[i-1] += BFS(graph, i, j)
+for i in range(1,N+1):
+    result = BFS(graph, i)
+    for j in range(1,N+1):
+        if i!=j:
+            s[j-1] += back(result, j)
 
+l = []
+for c, i in enumerate(s):
+    if i == min(s):
+        l.append(c+1)
 
-pass
+print(min(l))
+
     
