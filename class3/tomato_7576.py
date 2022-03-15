@@ -1,32 +1,30 @@
 from collections import deque
-m,n = map(int, input().split())
-graph = []
-queue = deque([])
-for i in range(n):
-    graph.append(list(map(int,input().split())))
-    
-    for j in range(m):
-        if graph[i][j]==1:
-            queue.append([i,j])
-
-dx = [-1,1,0,0]
-dy = [0,0,-1,1]
-def bfs():
+import sys
+input = sys.stdin.readline
+ 
+def bfs(graph, start, visited):    # BFS implementation
+    queue = deque([start])
+    visited[start] = True
+ 
     while queue:
-        x,y = queue.popleft()
-        for i in range(4):
-            a = x+dx[i]
-            b = y+dy[i]
-            if 0<=a<n and 0<=b<m and graph[a][b] == 0:
-                queue.append([a,b])
-                graph[a][b] = graph[x][y]+1
-
-bfs()
-result = 0
-for i in graph:
-    for j in i:
-        if j == 0:
-            print(-1)
-            exit(0)
-    result = max(result, max(i))
-print(result-1)
+        v = queue.popleft()
+        for i in graph[v]:
+            if not visited[i]:
+                queue.append(i)
+                visited[i] = True
+ 
+N, M = map(int, input().split())
+graph = [[] for _ in range(N + 1)]
+visited = [False] * (N + 1)
+ 
+for i in range(M):
+    node1, node2 = map(int, input().split())
+    graph[node2].append(node1)
+    graph[node1].append(node2)
+ 
+cnt = 0
+for i in range(1, N+1):    # check each node
+    if not visited[i]:
+        bfs(graph, i, visited)
+        cnt += 1
+print(cnt)
