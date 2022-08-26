@@ -15,14 +15,14 @@ try:
     result = driver.switch_to_alert()
     result.dismiss()
 except: pass
-studystartbtn = driver.find_element_by_xpath('//*[@id="section"]/div[4]/div[1]/table/tbody/tr[3]/td[10]/a')
+studystartbtn = driver.find_element_by_xpath('//*[@id="section"]/div[4]/div[1]/table/tbody/tr[2]/td[10]/a')
 studystartbtn.click()
 time.sleep(1)
 classcount = driver.find_elements_by_class_name("num")
 
-for i in range(26,len(classcount)):
+for i in range(0,len(classcount)):
     driver.refresh()
-    classStartbtn = driver.find_element_by_xpath('//*[@id="section"]/div[4]/div[4]/div[2]/ul/li[{0}]/div[4]/a'.format(i+2))
+    classStartbtn = driver.find_element_by_xpath('//*[@id="section"]/div[4]/div[4]/div[2]/ul/li[{0}]/div[4]/a'.format(i+1))
     classStartbtn.click()
     time.sleep(1)
     driver.switch_to_window( driver.window_handles[1] )
