@@ -20,7 +20,7 @@ studystartbtn.click()
 time.sleep(1)
 classcount = driver.find_elements_by_class_name("num")
 
-for i in range(0,len(classcount)):
+for i in range(4,len(classcount)):
     driver.refresh()
     classStartbtn = driver.find_element_by_xpath('//*[@id="section"]/div[4]/div[4]/div[2]/ul/li[{0}]/div[4]/a'.format(i+1))
     classStartbtn.click()
@@ -36,11 +36,7 @@ for i in range(0,len(classcount)):
     for j in range(1,14):
         time.sleep(10)
         try:
-            # driver.execute_script("changeFile('next')")
-            try:
-                driver.find_element_by_xpath('//*[@id="wrap"]/div[2]/table/tbody/tr/td[6]/a').click()
-            except:
-                driver.find_element_by_xpath('//*[@id="wrap"]/div[3]/table/tbody/tr/td[6]/a').click()
+            driver.execute_script("changeFile('next')")
         except:
             print("end or error")
             break
